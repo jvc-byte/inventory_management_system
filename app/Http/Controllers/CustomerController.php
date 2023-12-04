@@ -28,29 +28,14 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        // // dd($request['name']);
-        // $customer = new Customer();
+        // dd($request['name']);
+        $customer = new Customer();
 
-        // $customer->name = $request['name'];
-        // $customer->email = $request['email'];
-        // $customer->address = $request['address'];
-        // $customer->phone_number = $request['phone_number'];
-        // $customer->save();
-
-        // Get the current timestamp
-        $timestamp = now();
-
-        // Insert data into the database using raw SQL
-        \DB::insert(
-            'INSERT INTO `customers` (`name`, `email`, `address`, `phone_number`, `updated_at`, `created_at`) VALUES (?, ?, ?, ?, ?, ?)',
-            [
-                $request->input('name'),
-                $request->input('email'),
-                $request->input('address'),
-                $request->input('phone_number'),
-                $timestamp,
-                $timestamp,
-            ]);
+        $customer->name = $request['name'];
+        $customer->email = $request['email'];
+        $customer->address = $request['address'];
+        $customer->phone_number = $request['phone_number'];
+        $customer->save();
 
         return view('register_customer');
     }
