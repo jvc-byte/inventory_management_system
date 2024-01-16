@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
@@ -28,25 +30,37 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request['name']);
-        $customer = new Customer();
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => ['required', 'email'],
+            'address' => 'required',
+            'phone_number' => ['required', 'unique:customers']
+        ]);
 
-        $customer->name = $request['name'];
-        $customer->email = $request['email'];
-        $customer->address = $request['address'];
-        $customer->phone_number = $request['phone_number'];
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $customer = new Customer();
+        $customer->name = $request->input('name');
+        $customer->email = $request->input('email');
+        $customer->address = $request->input('address');
+        $customer->phone_number = $request->input('phone_number');
         $customer->save();
 
-        return view('register_customer');
+        return redirect('/view_customer')->with('success', 'Customer Added successfully');
     }
+
 
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        $customers = Customer::where('status', 1)->get();
+        return view('view_customer', ['customers' => $customers,]);
+        // return view('view_customer') -> with ('customers', $customers);
     }
 
     /**
@@ -54,7 +68,11 @@ class CustomerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $customer = Customer::where('status', 1)->where('id', $id)->first();
+
+        return view('edit_customer', [
+            'customer' => $customer,
+        ]);
     }
 
     /**
@@ -62,14 +80,35 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Find the customer by ID
+        $customers = Customer::find($id);
+
+        // Check if the customer is found
+        if (!$customers) {
+            return redirect('view_customer')->with('error', 'Customer not found');
+        }
+
+        // Update customer details
+        $customers->name = $request->input('name');
+        $customers->email = $request->input('email');
+        $customers->address = $request->input('address');
+        $customers->phone_number = $request->input('phone_number');
+        $customers->save();
+        return redirect('view_customer')->with('success', 'Customer updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // Find the customer by ID
+        $customer = Customer::find($id);
+
+        // Delete the customer
+        $customer->delete();
+
+        return redirect('/view_customer')->with('success', 'Customer deleted successfully');
     }
 }
