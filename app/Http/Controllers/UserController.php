@@ -47,7 +47,11 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::where('status', 1)->where('id', $id)->first();
+
+        return view('manager.edit_user', [
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -55,7 +59,19 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // 
+        // Find the customer by ID
+        $user = User::find($id);
+
+        // Check if the customer is found
+        if (!$user) {
+            return redirect('view_users')->with('error', 'User not found');
+        }
+
+        // Update customer details
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+        return redirect('view_users')->with('success', 'User updated successfully');
     }
 
     /**
@@ -63,6 +79,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Find the customer by ID
+        $user = User::find($id);
+
+        // Delete the customer
+        $user->delete();
+
+        return redirect('/view_users')->with('success', 'User deleted successfully');
     }
 }

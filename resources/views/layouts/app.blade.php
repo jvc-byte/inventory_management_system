@@ -85,6 +85,17 @@
                                         view Stock
                                     </a>
                                 </li>
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Supplier
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('add_supplier') }}">Add Supplier</a>
+                                        <a class="dropdown-item" href="{{ route('view_supplier') }}">View Suppliers</a>
+                                    </div>
+                                </li>
                             @endif
                             @if (Auth::user()->user_type == 3)
                                 <li class="nav-item dropdown">
@@ -94,7 +105,7 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('register_customer') }}">Add User</a>
+                                        <a class="dropdown-item" href="{{ route('register_user') }}">Register User</a>
                                         <a class="dropdown-item" href="{{ route('view_users') }}">View Users</a>
                                     </div>
                                 </li>

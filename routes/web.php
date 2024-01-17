@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Models\Customer;
@@ -29,6 +30,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/register_user', UserController::class)->name('register_user');
 
+
+
 Route::get('/register_customer', [CustomerController::class, 'index'])->name('register_customer');
 Route::post('/register_customer', [CustomerController::class, 'store'])->name('register_customer');
 Route::get('/view_customer', [CustomerController::class, 'show'])->name('view_customer');
@@ -47,4 +50,14 @@ Route::post('/update_product/{id}', [ProductController::class, 'update'])->name(
 Route::get('/delete_product/{id}', [ProductController::class, 'destroy'])->name('delete_product');
 
 Route::get('/view_users', [UserController::class, 'show'])->name('view_users');
+Route::get('/edit_user/{id}', [UserController::class, 'edit'])->name('edit_user');
+Route::post('/update_user/{id}', [UserController::class, 'update'])->name('update_user');
+Route::get('/delete_user/{id}', [UserController::class, 'destroy'])->name('delete_user');
+
+Route::get('/add_supplier', [SupplierController::class, 'index'])->name('add_supplier');
+Route::post('/insert_supplier', [SupplierController::class, 'store'])->name('insert_supplier');
+Route::get('/view_supplier', [SupplierController::class, 'show'])->name('view_supplier');
+Route::get('/edit_supplier/{id}', [SupplierController::class, 'edit'])->name('edit_supplier');
+Route::post('/update_supplier/{id}', [SupplierController::class, 'update'])->name('update_supplier');
+Route::get('/delete_supplier/{id}', [SupplierController::class, 'destroy'])->name('delete_supplier');
 
