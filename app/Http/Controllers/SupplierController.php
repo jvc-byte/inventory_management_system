@@ -45,7 +45,7 @@ class SupplierController extends Controller
         $supplier->email = $request->input('email');
         $supplier->save();
 
-        return redirect('view_supplier')->with('success', 'Supplier Added successfully');
+        return redirect('warehouse/view_supplier')->with('success', 'Supplier Added successfully');
     }
 
     /**
@@ -64,9 +64,7 @@ class SupplierController extends Controller
     {
         $suppliers = Supplier::where('status', 1)->where('id', $id)->first();
 
-        return view('warehouse.edit_supplier', [
-            'supplier' => $suppliers,
-        ]);
+        return view('warehouse.edit_supplier', [ 'supplier' => $suppliers ]);
     }
 
     /**
@@ -87,7 +85,7 @@ class SupplierController extends Controller
          $suppliers->address = $request->input('address');
          $suppliers->email = $request->input('email');
          $suppliers->save();
-         return redirect('view_supplier')->with('success', 'Supplier updated successfully');
+         return redirect('warehouse/view_supplier')->with('success', 'Supplier updated successfully');
     }
 
     /**
@@ -101,6 +99,6 @@ class SupplierController extends Controller
         // Delete the customer
         $suppliers->delete();
 
-        return redirect('/view_supplier')->with('success', 'Supplier deleted successfully');
+        return redirect('/warehouse/view_supplier')->with('success', 'Supplier deleted successfully');
     }
 }

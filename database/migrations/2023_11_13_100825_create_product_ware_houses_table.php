@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('product_ware_houses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_warehouse_id');
-            $table->string('name');
-            $table->integer('unit');
+            $table->foreignId('product_id');
+            $table->integer('quantity');
+            $table->string('unit');
             $table->double('price', 10, 2);
             $table->dateTime('expiry_date');
             $table->boolean('status')->default(1);

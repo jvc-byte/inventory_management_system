@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Models\Units;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use LDAP\Result;
 
 class ProductController extends Controller
 {
@@ -37,13 +39,15 @@ class ProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        $code = rand(000000, 999999);
         $product = new Products();
         $product->name = $request->input('name');
+        $product->code = $code;
         // Assign other fields if applicable
 
         $product->save();
 
-        return redirect('view_product')->with('success', 'Product Added successfully');
+        return redirect('warehouse/view_product')->with('success', 'Product Added successfully');
     }
 
 
@@ -78,13 +82,13 @@ class ProductController extends Controller
 
         // Check if the customer is found
         if (!$product) {
-            return redirect('view_product')->with('error', 'Product not found');
+            return redirect('/warehouse/view_product')->with('error', 'Product not found');
         }
 
         // Update customer details
         $product->name = $request->input('name');
         $product->save();
-        return redirect('view_product')->with('success', 'Product updated successfully');
+        return redirect('/warehouse/view_product')->with('success', 'Product updated successfully');
     }
 
     /**
@@ -98,6 +102,28 @@ class ProductController extends Controller
         // Delete the customer
         $product->delete();
 
-        return redirect('view_product')->with('success', 'Product deleted successfully');
+        return redirect('warehouse/view_product')->with('success', 'Product deleted successfully');
+    }
+
+    public function searchProduct(Request $request)
+    {
+        $searchs = [];
+        return view('warehouse.search_product', ['searchs' => $searchs]);
+    }
+
+    public function searchProductResult(Request $request)
+    {
+        $searchs = [];
+        $searchs = Products::where('code', 'like', '%' . $request['name'] . '%')
+            ->orwhere('name', 'like', '%' . $request['name'] . '%')->get();
+
+        return view('warehouse.search_product', ['searchs' => $searchs]);
+    }
+
+    public function productReceive(string $id)
+    {
+        $units = Units::all();
+        $product = Products::where('id', $id)->first();
+        return view('warehouse.receive_product', ['product' => $product, 'units' => $units]);
     }
 }

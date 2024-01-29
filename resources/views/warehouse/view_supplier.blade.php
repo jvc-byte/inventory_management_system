@@ -24,9 +24,11 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Address</th>
-                                        <th scope="col">Email</th>
+                                        <th scope="col">Supplier Name</th>
+                                        <th scope="col">Supplier Email</th>
+                                        <th scope="col">Supplier Address</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,7 +41,7 @@
                                                 <td><em class="text-muted">{{ $suppliers->address }}</em></td>
                                                 <td><em class="text-muted">{{ $suppliers->phone_number }}</em></td>
                                                 <td><a class="btn btn-outline-primary"
-                                                        href='{{ url("/edit_supplier/$suppliers->id") }}'>Edit</a></td>
+                                                        href='{{ url("/warehouse/edit_supplier/$suppliers->id") }}'>Edit</a></td>
 
                                                 <td>
                                                     <form action="{{ route('delete_supplier', $suppliers->id) }}"

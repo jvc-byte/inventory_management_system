@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use \App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -29,7 +30,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => ['required', 'email'],
+            'user_type' => 'required',
+            'password' => Hash::make('password'),
+        ]);
+
+        $users = new User();
+        $users->name = $request->input('name');
+        $users->email = $request->input('email');
+        $users->user_type = $request->input('user_type');
+        $users->password = $request->input('password');
+        $users->save();
+
+        return redirect('register_user')->with('success', "User {$users->name} registered successfully");
     }
 
 

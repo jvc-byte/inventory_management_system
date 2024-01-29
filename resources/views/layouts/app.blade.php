@@ -61,18 +61,18 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('add_product') }}">Add Product</a>
-                                        <a class="dropdown-item" href="{{ route('view_product') }}">View Product</a>
+                                        <a class="dropdown-item" href="{{ route('warehouse.add_product') }}">Add Product</a>
+                                        <a class="dropdown-item" href="{{ route('warehouse.view_product') }}">View Product</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="navbarDropdown" class="nav-link">
+                                    <a id="navbarDropdown" class="nav-link" href="{{ route('warehouse.search_product') }}">
                                         Receive Product
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a id="navbarDropdown" class="nav-link">
-                                        Sell Product
+                                        Send Product
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -92,8 +92,8 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('add_supplier') }}">Add Supplier</a>
-                                        <a class="dropdown-item" href="{{ route('view_supplier') }}">View Suppliers</a>
+                                        <a class="dropdown-item" href="{{ route('warehouse.add_supplier') }}">Add Supplier</a>
+                                        <a class="dropdown-item" href="{{ route('warehouse.view_supplier') }}">View Suppliers</a>
                                     </div>
                                 </li>
                             @endif
@@ -105,8 +105,8 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('register_user') }}">Register User</a>
-                                        <a class="dropdown-item" href="{{ route('view_users') }}">View Users</a>
+                                        <a class="dropdown-item" href="{{ route('manager.register_user') }}">Register User</a>
+                                        <a class="dropdown-item" href="{{ route('manager.view_users') }}">View Users</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">

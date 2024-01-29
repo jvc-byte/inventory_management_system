@@ -4,7 +4,7 @@
     <!-- Floating Labels Form -->
     <div class="container">
         <div class="row justify-content-center">
-            <form method="POST" action="{{ url("/update_supplier/$supplier->id") }}" class="row g-3 col-md-6">
+            <form method="POST" action="{{ url("/warehouse/update_supplier/$supplier->id") }}" class="row g-3 col-md-6">
                 @csrf
 
                 <div class="col-md-12">

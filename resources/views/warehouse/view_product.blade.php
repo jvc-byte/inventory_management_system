@@ -24,7 +24,10 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Code</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -32,9 +35,10 @@
                                         @foreach ($product as $products)
                                             <tr>
                                                 <th><em class="text-muted">{{ $loop->iteration }}</em></th>
+                                                <td><em class="text-muted">{{ $products->code }}</em></td>
                                                 <td><em class="text-muted">{{ $products->name }}</em></td>
                                                 <td><a class="btn btn-outline-primary"
-                                                        href='{{ url("/edit_product/$products->id") }}'>Edit</a></td>
+                                                        href='{{ url("/warehouse/edit_product/$products->id") }}'>Edit</a></td>
 
                                                 <td>
                                                     <form action="{{ route('delete_product', $products->id) }}"
