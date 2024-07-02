@@ -4,7 +4,7 @@
     <!-- Floating Labels Form -->
     <div class="container">
         <div class="row justify-content-center">
-            <form method="POST" action="{{ url('/warehouse/insert_in_warehouse') }}" class="row g-3 col-md-6">
+            <form method="GET" action="{{ url("/warehouse/insert_in_warehouse/$product->id") }}" class="row g-3 col-md-6">
                 @csrf
 
                 <div class="col-md-12">
@@ -37,11 +37,11 @@
 
                 <div class="col-md-12">
                     <div class="form-floating">
-                        <input type="text" class="form-control @error('qnty') is-invalid @enderror" id="qnty"
-                            name="qnty" placeholder="Quantity" value="{{ old('qnty') }}">
-                        <label for="qnty"><strong>Quantity:</strong></label>
+                        <input type="text" class="form-control @error('quantity') is-invalid @enderror" id="quantity"
+                            name="quantity" placeholder="Quantity" value="{{ old('quantity') }}">
+                        <label for="quantity"><strong>Quantity:</strong></label>
 
-                        @error('qnty')
+                        @error('quantity')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -55,12 +55,12 @@
                             value="{{ old('unit') }}" @required(true) autocomplete="unit">
                             <option value="">Select the unit</option>
                             @foreach ($units as $unit)
-                            <option value="{{$unit->id}}">{{$unit->name}}</option>  
+                                <option value="{{ $unit->name }}">{{ $unit->name }}</option>
                             @endforeach
                             @error('unit')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{$message}}</strong>
-                            </span>   
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </select>
                         <label for="unit"><strong>Unit:</strong></label>
@@ -89,11 +89,12 @@
 
                 <div class="col-md-12">
                     <div class="form-floating">
-                        <input type="date" class="form-control @error('EDate') is-invalid @enderror" id="EDate"
-                            name="EDate" placeholder="Expiring Date" value="{{ old('EDate') }}">
-                        <label for="EDate"><strong>Expiring Date:</strong></label>
+                        <input type="date" class="form-control @error('expiry_date') is-invalid @enderror"
+                            id="expiry_date" name="expiry_date" placeholder="Expiring Date"
+                            value="{{ old('expiry_date') }}">
+                        <label for="expiry_date"><strong>Expiring Date:</strong></label>
 
-                        @error('EDate')
+                        @error('expiry_date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

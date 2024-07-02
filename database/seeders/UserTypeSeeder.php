@@ -16,18 +16,18 @@ class UserTypeSeeder extends Seeder
         DB::table("user_types")->truncate();
         $user_types = [
             [
-                "name" => "Admin",
+                "name" => "Sales Rep",
                 "created_at" => date("y-m-d h:i:s"),
                 "updated_at" => date("y-m-d h:i:s"),
 
             ],
             [
-                "name" => "Sales Rep",
+                "name" => "Warehouse Rep ",
                 "created_at" => date("y-m-d h:i:s"),
                 "updated_at" => date("y-m-d h:i:s"),
             ],
             [
-                "name" => "Warehouse Rep",
+                "name" => "Manager",
                 "created_at" => date("y-m-d h:i:s"),
                 "updated_at" => date("y-m-d h:i:s"),
             ]

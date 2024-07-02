@@ -33,32 +33,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($customers) && count($customers) > 0)
-                                        @foreach ($customers as $customer)
-                                            <tr>
-                                                <th><em class="text-muted">{{ $loop->iteration }}</em></th>
-                                                <td><em class="text-muted">{{ $customer->name }}</em></td>
-                                                <td><em class="text-muted">{{ $customer->email }}</em></td>
-                                                <td><em class="text-muted">{{ $customer->address }}</em></td>
-                                                <td><em class="text-muted">{{ $customer->phone_number }}</em></td>
-                                                <td><a class="btn btn-outline-primary"
-                                                        href='{{ url("/edit_customer/$customer->id") }}'>Edit</a></td>
+                                    @forelse ($customers as $customer)
+                                        <tr>
+                                            <th><em class="text-muted">{{ $loop->iteration }}</em></th>
+                                            <td><em class="text-muted">{{ $customer->name }}</em></td>
+                                            <td><em class="text-muted">{{ $customer->email }}</em></td>
+                                            <td><em class="text-muted">{{ $customer->address }}</em></td>
+                                            <td><em class="text-muted">{{ $customer->phone_number }}</em></td>
+                                            <td><a class="btn btn-outline-primary"
+                                                    href='{{ url("/edit_customer/$customer->id") }}'>Edit</a></td>
 
-                                                <td>
-                                                    <form action="{{ route('delete_customer', $customer->id) }}"
-                                                        method="GET">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-outline-danger"
-                                                            onclick="return confirm('are you sure you want to delete this customer {{ $customer->name }}')">Delete</button>
-                                                    </form>
-                                                </td>
+                                            <td>
+                                                <form action="{{ route('delete_customer', $customer->id) }}" method="GET">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-outline-danger"
+                                                        onclick="return confirm('are you sure you want to delete this customer {{ $customer->name }}')">Delete</button>
+                                                </form>
+                                            </td>
 
-                                            </tr>
-                                        @endforeach
-                                    @else
+                                        </tr>
+                                    @empty
                                         <p>No customers found.</p>
-                                    @endif
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

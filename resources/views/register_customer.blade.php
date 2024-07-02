@@ -50,7 +50,7 @@
                     <div class="form-floating">
                         <input type="phone_number" class="form-control @error('phone_number') is-invalid @enderror"
                             id="phone_number" name="phone_number" placeholder="Number">
-                        <label for="phone_number">Number</label>
+                        <label for="phone_number">Phone Number</label>
 
                         @error('phone_number')
                             <span class="invalid-feedback" role="alert">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SalesAnalysisController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
@@ -28,7 +29,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/register_user', UserController::class)->name('register_user');
+Route::get('/manager/register_user', UserController::class)->name('manager.register_user');
 
 
 
@@ -42,7 +43,9 @@ Route::get('/delete_customer/{id}', [CustomerController::class, 'destroy'])->nam
 Route::get('/manager/home', [ManagerController::class, 'index'])->name('manager.home');
 Route::get('/warehouse/home', [WarehouseController::class, 'index'])->name('warehouse.home');
 Route::get('/warehouse/receive_product/{id}', [ProductController::class, 'productReceive'])->name('warehouse.receive_product');
-Route::get('/warehouse/insert_in_warehouse/{id}', [WarehouseController::class, 'productUpdate'])->name('warehouse.insert_in_warehouse');
+Route::get('/warehouse/view_warehouse_product', [WarehouseController::class, 'show'])->name('warehouse.view_warehouse_product');
+Route::get('/warehouse/view_warehouse_product', [WarehouseController::class, 'showWarehouse'])->name('warehouse.view_warehouse');
+Route::get('/warehouse/insert_in_warehouse/{id}', [WarehouseController::class, 'storeOrUpdate'])->name('warehouse.insert_in_warehouse');
 
 
 Route::get('/warehouse/search_product', [ProductController::class, 'searchProduct'])->name('warehouse.search_product');
@@ -55,7 +58,7 @@ Route::get('/warehouse/edit_product/{id}', [ProductController::class, 'edit'])->
 Route::post('/warehouse/update_product/{id}', [ProductController::class, 'update'])->name('warehouse.update_product');
 Route::get('/delete_product/{id}', [ProductController::class, 'destroy'])->name('delete_product');
 
-Route::get('/view_users', [UserController::class, 'show'])->name('view_users');
+Route::get('/manager/view_users', [UserController::class, 'show'])->name('manager.view_users');
 Route::get('/edit_user/{id}', [UserController::class, 'edit'])->name('edit_user');
 Route::post('/update_user/{id}', [UserController::class, 'update'])->name('update_user');
 Route::get('/delete_user/{id}', [UserController::class, 'destroy'])->name('delete_user');
@@ -67,4 +70,8 @@ Route::get('/warehouse/edit_supplier/{id}', [SupplierController::class, 'edit'])
 Route::post('/warehouse/update_supplier/{id}', [SupplierController::class, 'update'])->name('warehouse.update_supplier');
 Route::get('/delete_supplier/{id}', [SupplierController::class, 'destroy'])->name('delete_supplier');
 
-Route::post('/register_user', [UserController::class, 'store'])->name('register_user');
+Route::post('/manager/register_user', [UserController::class, 'store'])->name('manager.register_user');
+
+Route::get('/manager/daily_sales', [SalesAnalysisController::class, 'dailySale'])->name('manager.daily_sales');
+Route::get('/manager/weekly_sales', [SalesAnalysisController::class, 'weeklySale'])->name('manager.weekly_sales');
+Route::get('/manager/monthly_sales', [SalesAnalysisController::class, 'monthlySale'])->name('manager.monthly_sales');

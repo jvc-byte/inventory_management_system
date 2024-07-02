@@ -56,8 +56,8 @@ class ProductController extends Controller
      */
     public function show()
     {
-        $product = Products::where('status', 1)->get();
-        return view('warehouse.view_product', ['product' => $product,]);
+        $products = Products::where('status', 1)->get();
+        return view('warehouse.view_product', ['products' => $products,]);
     }
 
     /**
@@ -126,4 +126,5 @@ class ProductController extends Controller
         $product = Products::where('id', $id)->first();
         return view('warehouse.receive_product', ['product' => $product, 'units' => $units]);
     }
+
 }

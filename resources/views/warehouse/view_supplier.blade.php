@@ -32,32 +32,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($supplier) && count($supplier) > 0)
-                                        @foreach ($supplier as $suppliers)
-                                            <tr>
-                                                <th><em class="text-muted">{{ $loop->iteration }}</em></th>
-                                                <td><em class="text-muted">{{ $suppliers->name }}</em></td>
-                                                <td><em class="text-muted">{{ $suppliers->email }}</em></td>
-                                                <td><em class="text-muted">{{ $suppliers->address }}</em></td>
-                                                <td><em class="text-muted">{{ $suppliers->phone_number }}</em></td>
-                                                <td><a class="btn btn-outline-primary"
-                                                        href='{{ url("/warehouse/edit_supplier/$suppliers->id") }}'>Edit</a></td>
+                                    @forelse ($suppliers as $supplier)
+                                        <tr>
+                                            <th><em class="text-muted">{{ $loop->iteration }}</em></th>
+                                            <td><em class="text-muted">{{ $supplier->name }}</em></td>
+                                            <td><em class="text-muted">{{ $supplier->email }}</em></td>
+                                            <td><em class="text-muted">{{ $supplier->address }}</em></td>
+                                            <td><em class="text-muted">{{ $supplier->phone_number }}</em></td>
+                                            <td><a class="btn btn-outline-primary"
+                                                    href='{{ url("/warehouse/edit_supplier/$supplier->id") }}'>Edit</a>
+                                            </td>
 
-                                                <td>
-                                                    <form action="{{ route('delete_supplier', $suppliers->id) }}"
-                                                        method="GET">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-outline-danger"
-                                                            onclick="return confirm('are you sure you want to delete this supplier {{ $suppliers->name }}')">Delete</button>
-                                                    </form>
-                                                </td>
+                                            <td>
+                                                <form action="{{ route('delete_supplier', $supplier->id) }}"
+                                                    method="GET">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-outline-danger"
+                                                        onclick="return confirm('are you sure you want to delete this supplier {{ $supplier->name }}')">Delete</button>
+                                                </form>
+                                            </td>
 
-                                            </tr>
-                                        @endforeach
-                                    @else
+                                        </tr>
+                                    @empty
                                         <p>No supplier found.</p>
-                                    @endif
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

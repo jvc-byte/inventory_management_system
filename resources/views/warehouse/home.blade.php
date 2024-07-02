@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Warehoue Admin Dashboard') }}</div>
+                <div class="card-header">{{ __('Warehoue Manager') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Welcome back ') }}{{ Auth::user()->name }}
                 </div>
             </div>
     </div>

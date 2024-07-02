@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('product_ware_houses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id');
+            $table->string('code');
             $table->integer('quantity');
             $table->string('unit');
             $table->double('price', 10, 2);

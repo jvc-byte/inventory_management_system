@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use \App\Models\User;
+use App\Models\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('manager.register_user');
+        $user_types = UserType::all();
+        return view('manager.register_user', ['user_types' => $user_types]);
     }
 
     /**
@@ -44,7 +46,7 @@ class UserController extends Controller
         $users->password = $request->input('password');
         $users->save();
 
-        return redirect('register_user')->with('success', "User {$users->name} registered successfully");
+        return redirect('manager/register_user')->with('success', "User {$users->name} registered successfully");
     }
 
 
@@ -86,7 +88,8 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->save();
-        return redirect('view_users')->with('success', 'User updated successfully');
+        $users = User::where('status', 1)->get();
+        return view('manager.view_users', ['users' => $users,]);
     }
 
     /**
@@ -100,6 +103,7 @@ class UserController extends Controller
         // Delete the customer
         $user->delete();
 
-        return redirect('/view_users')->with('success', 'User deleted successfully');
+        $users = User::where('status', 1)->get();
+        return view('manager.view_users', ['users' => $users,]);
     }
 }

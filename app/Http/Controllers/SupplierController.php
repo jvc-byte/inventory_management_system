@@ -54,7 +54,7 @@ class SupplierController extends Controller
     public function show()
     {
         $suppliers = Supplier::where('status', 1)->get();
-        return view('warehouse.view_supplier', ['supplier' => $suppliers,]);
+        return view('warehouse.view_supplier', ['suppliers' => $suppliers,]);
     }
 
     /**

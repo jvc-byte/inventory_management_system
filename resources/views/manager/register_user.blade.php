@@ -19,7 +19,7 @@
                     <div class="card-header">{{ __('Register User') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register_user') }}">
+                        <form method="POST" action="{{ route('manager.register_user') }}">
                             @csrf
 
                             <div class="row mb-3">
@@ -65,9 +65,9 @@
                                         class="form-control @error('user_type') is-invalid @enderror" name="user_type"
                                         value="{{ old('user_type') }}" required autocomplete="user_type">
                                         <option value="">choose user to register</option>
-                                        <option value="1">Sales Rep</option>
-                                        <option value="2">Warehouse Admin</option>
-                                        <option value="3">Manager</option>
+                                        @foreach ($user_types as $user_type)
+                                        <option value="{{$user_type->id}}">{{$user_type->name}}</option>
+                                        @endforeach
 
                                         @error('user_type')
                                             <span class="invalid-feedback" role="alert">

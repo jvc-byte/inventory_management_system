@@ -45,7 +45,7 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('register_customer') }}">Create customer</a>
+                                        <a class="dropdown-item" href="{{ route('register_customer') }}">Add customer</a>
                                         <a class="dropdown-item" href="{{ route('view_customer') }}">View customer</a>
                                     </div>
                                 </li>
@@ -71,8 +71,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a id="navbarDropdown" class="nav-link" href="{{ route('warehouse.view_warehouse') }}">
+                                        View Receive Product
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a id="navbarDropdown" class="nav-link">
-                                        Send Product
+                                        Sell Product
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -116,9 +121,9 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('register_customer') }}">Daily Sales</a>
-                                        <a class="dropdown-item" href="{{ route('view_customer') }}">Weekly Sales</a>
-                                        <a class="dropdown-item" href="{{ route('view_customer') }}">Monthly Sales</a>
+                                        <a class="dropdown-item" href="{{ route('manager.daily_sales') }}">Daily Sales</a>
+                                        <a class="dropdown-item" href="{{ route('manager.weekly_sales') }}">Weekly Sales</a>
+                                        <a class="dropdown-item" href="{{ route('manager.monthly_sales') }}">Monthly Sales</a>
                                     </div>
                                 </li>
                             @endif

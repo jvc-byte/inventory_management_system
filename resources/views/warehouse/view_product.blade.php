@@ -31,30 +31,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (isset($product) && count($product) > 0)
-                                        @foreach ($product as $products)
-                                            <tr>
-                                                <th><em class="text-muted">{{ $loop->iteration }}</em></th>
-                                                <td><em class="text-muted">{{ $products->code }}</em></td>
-                                                <td><em class="text-muted">{{ $products->name }}</em></td>
-                                                <td><a class="btn btn-outline-primary"
-                                                        href='{{ url("/warehouse/edit_product/$products->id") }}'>Edit</a></td>
+                                    @forelse ($products as $product)
+                                        <tr>
+                                            <th><em class="text-muted">{{ $loop->iteration }}</em></th>
+                                            <td><em class="text-muted">{{ $product->code }}</em></td>
+                                            <td><em class="text-muted">{{ $product->name }}</em></td>
+                                            <td><a class="btn btn-outline-primary"
+                                                    href='{{ url("/warehouse/edit_product/$product->id") }}'>Edit</a></td>
 
-                                                <td>
-                                                    <form action="{{ route('delete_product', $products->id) }}"
-                                                        method="GET">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-outline-danger"
-                                                            onclick="return confirm('are you sure you want to delete this product {{ $products->name }}')">Delete</button>
-                                                    </form>
-                                                </td>
+                                            <td>
+                                                <form action="{{ route('delete_product', $product->id) }}" method="GET">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-outline-danger"
+                                                        onclick="return confirm('are you sure you want to delete this product {{ $product->name }}')">Delete</button>
+                                                </form>
+                                            </td>
 
-                                            </tr>
-                                        @endforeach
-                                    @else
+                                        </tr>
+                                    @empty
                                         <p>No Product Found.</p>
-                                    @endif
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

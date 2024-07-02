@@ -17,42 +17,49 @@
                     </div>
                 @endif
                 <div class="card">
-                    <div class="card-header">{{ _('View Users') }}</div>
+                    <div class="card-header">{{ _('View Products') }}</div>
                     <div class="card-body">
                         <div class="row">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">User Type</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Unit</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Expiring Date</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($users as $user)
+                                    @forelse ($warehouse_products as $warehouse_product)
                                         <tr>
                                             <th><em class="text-muted">{{ $loop->iteration }}</em></th>
-                                            <td><em class="text-muted">{{ $user->user_type }}</em></td>
-                                            <td><em class="text-muted">{{ $user->name }}</em></td>
-                                            <td><em class="text-muted">{{ $user->email }}</em></td>
+                                            <td><em class="text-muted">{{ $warehouse_product->code }}</em></td>
+                                            <td><em class="text-muted">{{ $warehouse_product->quantity }}</em></td>
+                                            <td><em class="text-muted">{{ $warehouse_product->unit }}</em></td>
+                                            <td><em class="text-muted">{{ $warehouse_product->price }}</em></td>
+                                            <td><em class="text-muted">{{ $warehouse_product->expiry_date }}</em></td>
                                             <td><a class="btn btn-outline-primary"
-                                                    href='{{ url("/edit_user/$user->id") }}'>Edit</a></td>
+                                                    href='{{ url("/warehouse/edit_product/$warehouse_product->id") }}'>Edit</a>
+                                            </td>
 
                                             <td>
-                                                <form action="{{ route('delete_user', $user->id) }}" method="GET">
+                                                <form action="{{ route('delete_product', $warehouse_product->id) }}"
+                                                    method="GET">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-outline-danger"
-                                                        onclick="return confirm('are you sure you want to delete this user {{ $user->name }}')">Delete</button>
+                                                        onclick="return confirm('are you sure you want to delete this product {{ $warehouse_product->name }}')">Delete</button>
                                                 </form>
                                             </td>
 
                                         </tr>
                                     @empty
-                                        <p>No user found.</p>
+                                        <p>No Product Found.</p>
                                     @endforelse
-
                                 </tbody>
                             </table>
                         </div>
