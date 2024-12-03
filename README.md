@@ -1,1 +1,1 @@
-# Inventory management system using PHP framework (laravel)
+# Inventory Management Sytem
