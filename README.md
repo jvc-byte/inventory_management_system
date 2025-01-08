@@ -1,6 +1,6 @@
 # Chucks Inventory Management System (CIMS)
 
-<img src="/public/CIMS-aut.png" alt="CIMS Logo" width="150">
+<img src="/public/CIMS-aut.png" alt="CIMS Logo" width="500">
 
 ## Overview
 
