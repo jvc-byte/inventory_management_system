@@ -27,6 +27,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/register',[App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register_data',[App\Http\Controllers\Auth\RegisterController::class, 'create']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/manager/register_user', UserController::class)->name('manager.register_user');
